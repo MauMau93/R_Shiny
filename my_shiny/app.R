@@ -21,15 +21,16 @@ ui <- navbarPage("Archery Data App",
                                       selectInput("select", label = h3("Plot participants according to Sex"), 
                                                   choices = character(0),
                                                   selected = 1),
-                                      selectInput("select2", label = h3("Choose Variable for x-axis"), 
-                                                  choices = character(0),
+                                      varSelectInput("select2", label = h3("Choose Variable for x-axis"), 
+                                                  data=ArcheryData,
                                                   selected = 1),
-                                      selectInput("select3", label = h3("Choose Variable for y-axis"), 
-                                                  choices = character(0),
+                                      varSelectInput("select3", label = h3("Choose Variable for y-axis"), 
+                                                 data=ArcheryData,
                                                   selected = 1)
                                   ),
                                   mainPanel(
-                                      plotOutput(outputId = "plot")
+                                      plotOutput(outputId = "plot"),
+                                      verbatimTextOutput("prueba")
                                   )
                               ))),
                  tabPanel("References",
@@ -46,17 +47,17 @@ server <- function(input, output, session) {
                       selected = tail(list_choices, 1)
     )
     updateSelectInput(session, "select2",
-                      choices = list_choices2,
-                      selected = tail(list_choices2, 1)
+                      choices = colnames(ArcheryData %>% select(-Sex, -Improve)),
+                      selected = "Average"
     )
     updateSelectInput(session, "select3",
-                      choices = list_choices3,
-                      selected = tail(list_choices3, 1)
+                      choices = colnames(ArcheryData %>% select(-Sex, -Improve)),
+                      selected = "Average"
     )
+    
+
     output$plot <- renderPlot({
-        ejex <- as.numeric(input$select2)
-        ejey <- as.numeric(input$select3)
-        ggplot(ArcheryData  %>% filter(Sex == input$select), aes(x = ejex ,y= ejey, colour = Sex)) +
+        ggplot(ArcheryData  %>% filter(Sex == input$select), aes(x = !!input$select2 ,y= !!input$select3, colour = Sex)) +
             col_scale +
             geom_point()
     })
