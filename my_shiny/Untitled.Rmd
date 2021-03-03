@@ -1,8 +1,7 @@
 ## References
 
+In 2002, Heather Tollerud, a Saint Olaf College student, undertook a study of the **archery scores** of students at the college who were enrolled in an archery course. Students taking the course record a score for each day they attend class from the first until the last day. Hopefully the instruction they receive helps them to improve their game.
 
 
-- [Shiny on RStudio](https://shiny.rstudio.com/)
-- [Shiny written tutorial](https://shiny.rstudio.com/tutorial/written-tutorial/lesson1/)
-- [Shiny Function reference version 1.2.0](https://shiny.rstudio.com/reference/shiny/1.2.0/)
-
+- [Presentation of Archery Data](http://maumau93.github.io/r_presentation/)
+- [Archery Data Source](https://cran.r-project.org/web/packages/Stat2Data/Stat2Data.pdf)
